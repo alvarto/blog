@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Demo for canvas</title>
+<style type="text/css">
+	body{ font-family: 'fz-L',"Microsoft YaHei","Hiragino Sans GB",sans-serif; text-align: center; margin: 0; background-color: #3498db; color: #FFF; }
+	table { margin: 0 auto; }
+	canvas{ background-color: #ecf0f1; width: 200px; height: 200px; transition: background-color .2s; }
+	.active { background-color: #FFA; }
+	small { color: #3498db }
+	td { width: 250px; vertical-align: top; }
+	nav { overflow: hidden; margin: 0 0 1em; background-color: #2980b9; color: #ecf0f1; }
+</style>
+</head>
+<body>
+	<nav>
+		<h1>Canvas Transformations</h1>
+		<p>Or you can drag a picture here</p>
+	</nav>
+	<table>
+		<tr>
+			<th>Rotate</th>
+			<td>
+				<h2>0deg</h2>
+				<canvas data-matrix="1,0,0,1,0,0" width=200 height=200></canvas>
+				<pre><code>1,0,0,1</code></pre>
+			</td>
+			<td>
+				<h2>90deg</h2>
+				<canvas data-matrix="0,1,-1,0,0,0" width=200 height=200></canvas>
+				<pre><code>0,1,-1,0</code></pre>
+			</td>
+			<td>
+				<h2>180deg</h2>
+				<canvas data-matrix="-1,0,0,-1,0,0" width=200 height=200></canvas>
+				<pre><code>-1,0,0,-1</code></pre>
+			</td>
+			<td>
+				<h2>270deg</h2>
+				<canvas data-matrix="0,-1,1,0,0,0" width=200 height=200></canvas>
+				<pre><code>0,-1,1,0</code></pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Flip</th>
+			<td>
+				<h2>None</h2>
+				<canvas data-matrix="1,0,0,1,0,0" width=200 height=200></canvas>
+				<pre><code>1,0,0,1</code></pre>
+			</td>
+			<td>
+				<h2>Vertical</h2>
+				<canvas data-matrix="1,0,0,-1,0,0" width=200 height=200></canvas>
+				<pre><code>1,0,0,-1</code></pre>
+			</td>
+			<td>
+				<h2>Horizontal</h2>
+				<canvas data-matrix="-1,0,0,1,0,0" width=200 height=200></canvas>
+				<pre><code>-1,0,0,1</code></pre>
+			</td>
+			<td>
+				<h2>V & H</h2>
+				<canvas data-matrix="-1,0,0,-1,0,0" width=200 height=200></canvas>
+				<pre><code>-1,0,0,-1</code></pre>
+			</td>
+		</tr>
+	</table>
+	<img hidden src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAIAAAAiOjnJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGMURDMDkwODREMzExMUU1OThENkMyMjg4QUUyRjY4NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGMURDMDkwOTREMzExMUU1OThENkMyMjg4QUUyRjY4NiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkYxREMwOTA2NEQzMTExRTU5OEQ2QzIyODhBRTJGNjg2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkYxREMwOTA3NEQzMTExRTU5OEQ2QzIyODhBRTJGNjg2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+pQ9gHQAAEN5JREFUeNrsm3uMXFUd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">
+	<script>
+		var img = document.querySelector("img") ;
+		document.addEventListener("dragover", function(evt){
+		    evt.preventDefault() ;
+		}, false) ;
+		document.addEventListener("drop", function(evt){
+		    //file reader
+			var reader = new FileReader();
+			reader.onloadend = function(evt){
+				img.onload = readAll ;
+				img.src = reader.result ;
+			} ;
+			reader.readAsDataURL(evt.dataTransfer.files[0]) ;
+		    evt.preventDefault() ;
+		}, false) ;
+
+		function readAll(){
+			Array.prototype.forEach.call(
+				document.querySelectorAll("canvas"),
+				function(elem) {
+					var context = elem.getContext("2d");
+					var cx = elem.clientWidth / 2,
+						cy = elem.clientHeight / 2 ;
+					var matrix = elem.dataset["matrix"] ;
+					if(!matrix) {
+						return;
+					}
+
+					matrix = matrix.split(",").map(function(x){
+						return +x ;
+					});
+					context.save() ;
+					context.transform.apply(context, [1,0,0,1,cx,cy]) ;
+					context.transform.apply(context, matrix) ;
+					context.transform.apply(context, [1,0,0,1,-cx,-cy]) ;
+					context.drawImage(img,0,0,img.width,img.height,0,0,cx*2,cy*2) ;
+					context.fillStyle = '#e74c3c' ;
+					context.fillRect(0,0,25,25);
+					context.restore() ;
+				}
+			) ;
+		}
+		readAll() ;
+	</script>
+</body>
+</html>
