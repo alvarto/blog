@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Interpolation</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<style type="text/css">
+		ul {
+			transition: none;
+		}
+/*		li {
+			opacity: .9;
+		}*/
+	</style>
+</head>
+<body>
+	<p class="control">
+		<button id="play">play</button>
+		<progress max=100 value=0></progress>
+		<button id="combine">combine</button>
+	</p>
+	<div class="wrap-left">
+		<h2>linear interpolation</h2>
+		<ul class="cont-left">
+			<li class="phase-back">后</li>
+			<li class="phase-front">前</li>
+			<li class="phase-left">左</li>
+			<li class="phase-right">右</li>
+			<li class="phase-top">上</li>
+			<li class="phase-bottom">下</li>
+		</ul>
+	</div>
+	<div class="wrap-right">
+		<h2>auto interpolation</h2>
+		<ul class="cont-right">
+			<li class="phase-back">后</li>
+			<li class="phase-front">前</li>
+			<li class="phase-left">左</li>
+			<li class="phase-right">右</li>
+			<li class="phase-top">上</li>
+			<li class="phase-bottom">下</li>
+		</ul>
+	</div>
+	<div id="wrap_popup">
+	</div>
+	<div id="wrap_template">
+		<script type="text/html" id="template_info">
+		    <div class="info">
+		    	<label for="interpolation_t">t=$x$</label>
+		    </div>
+		</script>
+		<script type="text/html" id="template_style_left">
+		    <style class="style"> .cont-left { transform: $left$ ; } </style>
+		</script>
+		<script type="text/html" id="template_style_right">
+		    <style class="style style-hide">
+	    	.cont-left { transform: $from$ ; }
+	    	.cont-right {
+	    		transform: $from$ ;
+	    		-webkit-animation: rr 3200ms linear forwards; animation: rr 3200ms linear forwards;
+	    		-webkit-animation-play-state: paused; animation-play-state: paused;
+	    	}
+		    @-webkit-keyframes rr{
+		    	from { -webkit-transform: $from$ ; }
+		    	to   { -webkit-transform: $to$  ; }
+		    }
+		    @keyframes rr{
+		    	from { transform: $from$ ; }
+		    	to   { transform: $to$   ; }
+		    }
+		    </style>
+		</script>
+		<script type="text/html" id="template_transform">
+			<div class="wrap-transform">
+				<div class="transform">
+					<div class="row">
+						<div class="cell">$m11$</div>
+						<div class="cell">$m21$</div>
+						<div class="cell">$m31$</div>
+						<div class="cell">$m41$</div>
+					</div>
+					<div class="row">
+						<div class="cell">$m12$</div>
+						<div class="cell">$m22$</div>
+						<div class="cell">$m32$</div>
+						<div class="cell">$m42$</div>
+					</div>
+					<div class="row">
+						<div class="cell">$m13$</div>
+						<div class="cell">$m23$</div>
+						<div class="cell">$m33$</div>
+						<div class="cell">$m43$</div>
+					</div>
+					<div class="row">
+						<div class="cell">$m14$</div>
+						<div class="cell">$m24$</div>
+						<div class="cell">$m34$</div>
+						<div class="cell">$m44$</div>
+					</div>
+				</div>
+			</div>
+		</script>
+	</div>
+	<script type="text/javascript" src="cssmatrix.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript">
+		var ANGLE = Math.PI/8 ;
+		var fromMatrix = makeRotate3dMatrix(1, 0, 0, ANGLE) ;
+		var toMatrix = makeRotate3dMatrix(1, 1, 0, ANGLE) ;
+		popupInject("style_right")({
+			from : fromMatrix + "" ,
+			to   : toMatrix + ""
+		}) ;
+
+		var progress = document.querySelector("progress") ;
+		var right = document.querySelector(".cont-right") ;
+
+		var timer = new CountdownTimer(32, 100, {
+			IStart : function(){
+				right.style.webkitAnimationPlayState = "running" ;
+				right.style.animationPlayState = "running" ;
+			},
+			IProgress : function(){
+				progress.value = this.passed ;
+				changeLeft(this.passed/100) ;
+			},
+			IClear : function(){
+				right.style.webkitAnimationPlayState = "paused" ;
+				right.style.animationPlayState = "paused" ;
+				right.offsetWidth = right.offsetWidth;
+			}
+		}) ;
+		document.querySelector("#play").addEventListener("click", function(){
+			this.style.visibility = "hidden" ;
+			timer.clear() ;
+			timer.start() ;
+		}, false);
+		document.querySelector("#combine").addEventListener("click", function(){
+			this.style.visibility = "hidden" ;
+			document.body.classList.add("combined") ;
+		}, false);
+		function changeLeft(t) {
+			var midMatrix = new CSSMatrix() ;
+			for(var i=0 ; i<16 ; i++){
+				var index = 'm'+((i/4|0)+1)+(i%4+1) ;
+				midMatrix[index] = (1-t) * fromMatrix[index] + t * toMatrix[index] ;
+			}
+			popupInject("style_left")({
+				left: midMatrix + ""
+			}) ;
+		}
+	</script>
+</body>
+</html>

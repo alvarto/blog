@@ -1,0 +1,173 @@
+html,
+body { margin: 0 ; padding : 0; height: 100%; }
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, "微软雅黑", sans-serif;
+    color: #343434;
+}
+
+.info ,
+.style,
+.wrap-transform {
+	position: fixed;
+	font-size: 24px; line-height: 1.44; font-family: courier, monospace;
+}
+
+.cell {
+	display: inline-block;
+	width: 4em; margin: 0 .1em;
+	overflow: hidden;
+	text-align: center; white-space: nowrap; text-overflow: clip;
+}
+
+.info {
+	display: block;
+	font-size: 48px;
+    bottom: 10px ; right: 10px ;
+}
+
+.style {
+	display: block;
+    top: 10px ; right: 10px ; left: 10px;
+    word-break: break-all;
+}
+
+.wrap-transform {
+    bottom: 10px ; left: 10px ;
+}
+
+.wrap-left {
+	position: absolute;
+	left: 0; top: 0;
+	width: 50%; height: 100%;
+}
+.wrap-right {
+	position: absolute;
+	right: 0; top: 0;
+	width: 50%; height: 100%;
+}
+
+.transform {
+	padding: 0 .7em;
+	border-radius: .5em; border-left: 1px solid; border-right: 1px solid;
+	font-size: 14px;
+}
+.transform,
+.axis { vertical-align: middle; display: inline-block; }
+
+.control {
+	position: absolute; top: 10px; left: 10px; right: 10px;
+	text-align: center;
+	z-index: 11;
+}
+
+progress {
+	width: 70%;
+	vertical-align: middle;
+}
+
+h1 {
+    position: fixed; bottom: 10px ; left: 10px ;
+    font-size: 20px; font-weight: normal;
+    margin: 0;
+}
+
+.wrap-left h2 {
+    position: fixed; bottom: 10px; left: 10px; color: #EF6FB5;
+}
+.wrap-right h2 {
+    position: fixed; bottom: 10px; right: 10px; color: #0DCEEE;
+}
+
+.wrap {
+    height: 100%;
+    perspective: 1000px;
+}
+
+ul {
+    position: absolute;
+    top: 50%; left: 50%; margin: -80px;
+    padding: 0; width: 160px; height: 160px;
+    transform-origin: 50% 50% -80px; transform-style: preserve-3d;
+    transition: .3s ease;
+}
+
+li {
+    position: absolute; display: block;
+    width: 100%; height: 100%;
+    /*opacity: .9;*/
+    text-align: center; font-size: 100px; line-height: 160px;
+     backface-visibility: hidden;
+}
+
+.phase-front,
+.phase-back {
+    top: 0px; left: 0px;
+}
+
+.phase-left ,
+.phase-right{
+    top: 0px;
+}
+
+.phase-top ,
+.phase-bottom{
+    left: 0px;
+}
+
+.phase-front {
+    background: #DA0C30; color: #FFF;
+}
+
+.phase-back {
+    transform: rotateY(-180deg) translateZ(160px); transform-origin: center center 0;
+    background: black; color: #FFF;
+}
+
+.phase-left {
+    right: 100%;
+    transform: rotateY(-90deg) ; transform-origin: right center 0;
+    background: #F1C0B6;
+}
+
+.phase-right {
+    left: 100%;
+    transform: rotateY(90deg) ; transform-origin: left center 0;
+    background: #F4E2D6;
+}
+
+.phase-top {
+    bottom: 100%;
+    transform: rotateX(90deg) ; transform-origin: center bottom 0;
+    background: #FFB461; color: #FFF;
+}
+
+.phase-bottom {
+    top: 100%;
+    transform: rotateX(-90deg) ; transform-origin: center top 0;
+    background: #0E0F24; color: #FFF;
+}
+
+.cont-left .phase-front { background: #EF6FB5; }
+.cont-left .phase-back  { background: #EF6FB5; }
+.cont-left .phase-left  { background: #BC578E; }
+.cont-left .phase-right { background: #BC578E; }
+.cont-left .phase-top   { background: #F2B9D8; }
+.cont-left .phase-bottom{ background: #F2B9D8; }
+
+.cont-right .phase-front { background: #0DCEEE; }
+.cont-right .phase-back  { background: #0DCEEE; }
+.cont-right .phase-left  { background: #04AFDA; }
+.cont-right .phase-right { background: #04AFDA; }
+.cont-right .phase-top   { background: #5D65A7; }
+.cont-right .phase-bottom{ background: #5D65A7; }
+
+.combined .wrap-left,
+.combined .wrap-right { opacity: 0.5; transition: .5s; }
+
+.combined .wrap-left  { left: 25%; }
+.combined .wrap-right { right: 25%; }
+
+.style-hide {
+	display: none;
+}

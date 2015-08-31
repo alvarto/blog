@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Rotate 3D Transform</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="wrap">
+		<ul class="cont">
+			<li class="phase-back">后</li>
+			<li class="phase-left">左</li>
+			<li class="phase-right">右</li>
+			<li class="phase-top">上</li>
+			<li class="phase-bottom">下</li>
+			<li class="phase-front">前</li>
+		</ul>
+	</div>
+	<style class="style" contenteditable> ul.cont { transform: translateX(100px) rotateX(45deg) rotateY(45deg) ; }</style>
+	<div id="wrap_popup"></div>
+	<div id="wrap_template">
+		<script type="text/html" id="template_transform">
+			<div class="wrap-transform">
+				<div class="transform">
+					<div class="row">
+						<div class="cell">$m11$</div>
+						<div class="cell">$m21$</div>
+						<div class="cell">$m31$</div>
+						<div class="cell">$m41$</div>
+					</div>
+					<div class="row">
+						<div class="cell">$m12$</div>
+						<div class="cell">$m22$</div>
+						<div class="cell">$m32$</div>
+						<div class="cell">$m42$</div>
+					</div>
+					<div class="row">
+						<div class="cell">$m13$</div>
+						<div class="cell">$m23$</div>
+						<div class="cell">$m33$</div>
+						<div class="cell">$m43$</div>
+					</div>
+					<div class="row">
+						<div class="cell">$m14$</div>
+						<div class="cell">$m24$</div>
+						<div class="cell">$m34$</div>
+						<div class="cell">$m44$</div>
+					</div>
+				</div>
+			</div>
+		</script>
+	</div>
+	<script type="text/javascript" src="cssmatrix.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript">
+		refreshInfo() ;
+	</script>
+</body>
+</html>
